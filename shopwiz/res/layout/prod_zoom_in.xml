@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@color/offwhite">
+<com.tech.shopwiz.TouchImageView
+    android:id="@+id/image_tobe_zoomed"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:src="@drawable/kurti1"
+    
+         android:scaleType="fitCenter"
+       
+    />
+ <Button
+        android:id="@+id/button1_cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/ic_canel" />
+</RelativeLayout>

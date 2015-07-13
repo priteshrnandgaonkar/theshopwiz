@@ -1,0 +1,228 @@
+ <android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <!-- xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" -->
+<!-- <RelativeLayout  
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backwiz5"
+    >-->
+<LinearLayout  
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   android:background="@color/black" 
+     
+    >
+    <!--  android:gravity="center"
+      android:background="@drawable/backwiz5" -->
+<!--  android:layout_centerInParent="true" -->
+    <!-- <AutoCompleteTextView
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="20" 
+        android:hint="Type Location"
+        >
+
+        <requestFocus />
+        
+    </AutoCompleteTextView>-->
+    <LinearLayout
+         android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:weightSum="4"
+          android:layout_weight="0.05"
+          android:adjustViewBounds="true"
+         
+         >
+     <com.tech.shopwiz.CustomAutoCompleteTextView
+        android:id="@+id/atv_places"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"        
+        android:hint="Enter the place"
+        android:selectAllOnFocus="true"
+        android:layout_weight="4"
+        android:adjustViewBounds="true"
+     	android:textColor="@color/white"
+     	
+        >
+       
+        </com.tech.shopwiz.CustomAutoCompleteTextView>
+     <!--  <View 
+        android:layout_width="0dp"
+        android:layout_height="0dp" 
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.3"
+         />
+     <Button
+   		android:id="@+id/your_loc_butt"
+    	android:layout_width="0dp"
+    	android:layout_height="wrap_content"
+    	android:text="Location"
+       android:textColor="@color/black"
+       android:background="@drawable/round_button"
+       android:layout_weight="1.7"
+        />-->
+     </LinearLayout>
+   <!--  <View 
+        android:layout_width="0dp"
+        android:layout_height="20dip" 
+        android:layout_centerHorizontal="true"
+         />-->
+<!-- <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="5"
+    >-->
+<LinearLayout 
+     android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"    
+        android:orientation="horizontal"
+         android:focusable="true" 
+		  android:focusableInTouchMode="true"
+    >
+      <View 
+        android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         />
+    <ImageView
+        android:id="@+id/item"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+   		android:src="@drawable/product_selected"
+   		android:adjustViewBounds="true"
+        />
+    <View 
+        android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         />
+</LinearLayout>
+    <!-- <ImageView
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+   		android:src="@drawable/product_selected"
+   		android:adjustViewBounds="true"
+   		android:layout_weight="1"
+   	    android:layoutDirection="inherit"
+        />-->
+    
+    <!--  android:text="item"
+       android:textColor="@color/black"
+      android:background="@drawable/round_button" -->
+    <!--  android:background="@drawable/round_button" -->
+   <!--  <View 
+        android:layout_width="0dp"
+        android:layout_height="0dp" 
+        android:layout_centerHorizontal="true"
+         android:layout_weight="1"/>-->
+         <LinearLayout 
+     android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"    
+        android:orientation="horizontal"
+    >
+      <View 
+        android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         />
+	<ImageView
+        android:id="@+id/shop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"     
+        android:layout_weight="2"
+      android:src="@drawable/shop_selected"
+      android:adjustViewBounds="true"
+         />
+	<View 
+        android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         />
+</LinearLayout>
+	
+	<!--<ImageView
+        android:id="@+id/shop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"     
+        android:layout_weight="1"
+      android:src="@drawable/shop_selected"
+      android:adjustViewBounds="true"
+      android:layoutDirection="inherit"
+         />-->
+	<!-- android:background="@drawable/round_button" -->
+
+      <!--   </LinearLayout> -->
+
+
+    
+</LinearLayout>
+
+<!--  <Button
+    android:id="@+id/your_loc_butt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:text="Your Location"
+       android:textColor="@color/black"
+       android:background="@drawable/round_button" />-->
+
+<!--  </RelativeLayout>-->
+<LinearLayout 
+     android:layout_width="240dp"
+     android:layout_height="match_parent"
+     android:orientation="vertical" 
+     android:layout_gravity="start"
+      android:id="@+id/drawer_lin_layout"  >
+<LinearLayout
+     android:layout_width="240dp"
+     android:layout_height="wrap_content"
+     android:background="@drawable/background_poly"
+     android:orientation="vertical" >
+<com.mikhaellopez.circularimageview.CircularImageView
+    android:id="@+id/user_photo"
+ 	android:layout_width="80dp"
+ 	 android:layout_height="80dp"
+ 	 android:src="@drawable/prit_img_2"
+ 	 
+    />
+<TextView 
+    android:id="@+id/user_name"
+     android:layout_width="240dp"
+     android:layout_height="wrap_content"
+     android:textSize="20sp"
+     android:text="Pritesh Nandgaonkar"
+          android:textColor="@color/white"
+    />
+<TextView 
+    android:id="@+id/user_email_id"
+     android:layout_width="240dp"
+     android:layout_height="wrap_content"
+     android:text="prit.nandgaonkar@gmail.com"
+     android:textSize="16sp"
+     android:textColor="@color/white"
+    />
+</LinearLayout>
+   <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#111"/>
+   </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  > 
+ 
+  
+  <!-- android:layout_weight="1" --> 
+<LinearLayout 
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:id="@+id/lin_front_shop_description"
+  
+ >
+ <!-- android:weightSum="3" -->
+  <ImageView 
+      android:layout_width="match_parent"
+      android:layout_height="0dip"
+      android:id="@+id/img_shop_selected"
+      android:layout_weight="1"
+      />
+      <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@color/black"/>
+  <TabHost android:id="@+id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="0dip"
+    android:layout_weight="2">
+     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+             android:fillViewport="true">
+    <TabWidget android:id="@android:id/tabs"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+    />
+    </HorizontalScrollView>
+    <FrameLayout android:id="@android:id/tabcontent"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="30dip"
+     >
+    </FrameLayout>
+     </LinearLayout>
+  </TabHost>
+ 
+  <!-- <RelativeLayout 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+       android:id="@+id/relativeLayout_shop_description"
+       android:background="@color/offwhite"
+      
+      >
+  <TableLayout 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tableLayout_shop_description"
+      >
+      <TableRow 
+          android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+          >
+          <TextView
+               android:layout_weight="1"
+               android:text="Name" 
+                />
+             <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"/>
+             <TextView
+                 android:id="@+id/shop_name_tablerow"
+               android:layout_weight="1"
+               android:text="brand name" 
+                />
+      </TableRow>
+      <TableRow 
+          android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+          >
+          <TextView
+               android:layout_weight="1"
+               android:text="Address" 
+                />
+             <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"/>
+             <TextView
+                 android:id="@+id/shop_address_tablerow"
+               android:layout_weight="1"
+               android:text="address" 
+                />
+      </TableRow>
+      <TableRow 
+          android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tablerow_landline"
+          >
+          <TextView
+               android:layout_weight="1"
+               android:text="Landline" 
+                />
+             <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"/>
+             <TextView
+                 android:id="@+id/shop_landline_tablerow"
+               android:layout_weight="1"
+               android:text="landline" 
+                />
+             
+      </TableRow>
+    <TableRow 
+          android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tablerow_mobile"
+          >
+          <TextView
+               android:layout_weight="1"
+               android:text="Mobile" 
+                />
+             <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"/>
+             <TextView
+                 android:id="@+id/shop_mobile_tablerow"
+               android:layout_weight="1"
+               android:text="mobile" 
+                />
+             
+      </TableRow>  
+       <TableRow 
+          android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tablerow_website"
+          >
+          <TextView
+               android:layout_weight="1"
+               android:text="Website" 
+                />
+             <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"/>
+             <TextView
+                 android:id="@+id/shop_website_tablerow"
+               android:layout_weight="1"
+               android:text="Website" 
+                />
+      </TableRow>
+      <TableRow 
+          android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tablerow_description"
+          >
+          <TextView
+               android:layout_weight="1"
+               android:text="Description" 
+                />
+             <View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"/>
+             <TextView
+                 android:id="@+id/shop_description_tablerow"
+               android:layout_weight="1"
+               android:text="description" 
+                />
+      </TableRow>
+      
+  </TableLayout>
+
+  </RelativeLayout>-->
+   </LinearLayout>
+</ScrollView>

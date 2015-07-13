@@ -1,0 +1,77 @@
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:id="@+id/main_layout"
+    android:background="@color/black"
+    android:layout_marginBottom="10dp">
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/shop_img_shop_page_listview"
+        android:src="@drawable/shop_1"
+        android:adjustViewBounds="true"
+        android:alpha="0.3"
+        />
+    <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+              android:layout_gravity="center_vertical"
+              android:layout_marginLeft="10dp"
+               >
+               <TextView 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="WestRoad Shop"
+               android:id="@+id/shop_name_shop_page_listview"
+               android:textColor="@color/white"
+               android:textSize="20sp"
+               
+               />
+                   <TextView 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/shop_oneLineAddress_shop_page_listview"
+               android:text="15th Lane Santacruz East"
+               android:textColor="@color/white"
+               android:textSize="14sp"
+          
+               />
+           </LinearLayout>
+           <!--  android:background="@drawable/ -->
+
+           <!--  <Button
+               android:layout_width="80dp"
+               android:layout_height="80dp" 
+               android:layout_gravity="center_vertical|right"
+               android:layout_marginRight="10dp"/>
+           
+    			<LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+                android:layout_gravity="center_vertical|right"
+              android:layout_marginRight="20dp"
+              
+               >
+               <TextView 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="0.3km"
+               android:textColor="@color/white"
+               android:textSize="16sp"
+               
+               />
+                   <TextView 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Navigate"
+               android:textColor="@color/white"
+               android:textSize="14sp"
+          
+               />
+           </LinearLayout>-->
+    </FrameLayout>
+ 

@@ -1,0 +1,45 @@
+ <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/action_bar_lin_layout_2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+  	android:orientation="horizontal"
+  	android:layout_gravity="fill_horizontal"
+  	 android:enabled="false"
+  
+   >
+   <Button 
+        android:id="@+id/filter_back_button_new_shop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:onClick="back_butt_clicked"
+        android:background="@drawable/ic_action"
+       
+        />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="3"        
+        />
+    <Button 
+        android:id="@+id/filter_applied_button_new_shop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:onClick="apply_filter_butt_clicked"
+        android:textColor="@color/white"
+        android:layout_weight="3"
+        android:background="@color/black"
+        />
+    <Button 
+        android:id="@+id/filter_reset_button_new_shop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:textColor="@color/white"
+        android:layout_weight="3"
+        android:background="@color/black"
+        />
+    
+</LinearLayout>

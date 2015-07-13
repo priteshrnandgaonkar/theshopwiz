@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TheShopWiz</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="search_title">Search Here</string>
+    <string-array name="drawer_contents">
+        
+        <item>Home</item>
+        <item>View Recent Activities</item>
+        <item>Contact us</item>
+        <item>About us</item>
+        
+    </string-array>
+    <string name="drawer_open">Open app drawer</string>
+    <string name="drawer_close">Close app drawer</string>
+</resources>

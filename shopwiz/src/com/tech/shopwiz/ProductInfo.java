@@ -17,6 +17,8 @@ String productid;  //1
 public ArrayList<String> imageurl;
 String description;//1
 int rating;
+public String category;
+public int popularity;
 public ArrayList<String> size;
 public ArrayList<String> pattern;
 public ArrayList<String> style;

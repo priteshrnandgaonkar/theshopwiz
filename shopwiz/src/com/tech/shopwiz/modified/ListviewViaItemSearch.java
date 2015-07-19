@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import com.tech.shopwiz.R.color;
 
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.Gravity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,6 +46,8 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,6 +58,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.animation.Animation;
@@ -60,9 +66,12 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -71,6 +80,7 @@ import android.view.View.OnTouchListener;
 
 public class ListviewViaItemSearch extends Fragment implements  GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener,OnTouchListener{
 	ImageLoader imloader;
+	FrameLayout frameLayout;
 	int visibility_count=0;
 	ArrayList<String> unknown_field_names;
 	HashMap<String,ArrayList<String>> filter_entries;
@@ -105,7 +115,6 @@ public class ListviewViaItemSearch extends Fragment implements  GestureDetector.
 	InteractiveArrayAdapterColor adapter_color;
 	InteractiveArrayAdapter adapter_pattern;
 	InteractiveArrayAdapter adapter_size;
-
 	String current_view;
 	 String category;
 	 String gender;
@@ -120,7 +129,10 @@ public class ListviewViaItemSearch extends Fragment implements  GestureDetector.
 	TableRow fabric_img;
 	String current_clicked;
 	GestureDetector gestureDetector;
-	View rootView ;
+	View rootView;
+	Button popButton;
+	PopupWindow popup;
+
 	public ListviewViaItemSearch(String gender_and_cat,String _gender,String _cat,Location _loc) {
 		// TODO Auto-generated constructor stub
 		this.value=gender_and_cat;
@@ -138,14 +150,11 @@ public class ListviewViaItemSearch extends Fragment implements  GestureDetector.
 	    Toast.makeText(this, "Activity state saved", Toast.LENGTH_LONG).show();
 	}*/
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 	    rootView = inflater.inflate(R.layout.main_listview_file_prod, container,false);
-	    current_view="products_page";
-	   
-	    
-	   gestureDetector
-	    = new GestureDetector(simpleOnGestureListener);
+	    current_view="products_page"; 	    
+	   gestureDetector = new GestureDetector(simpleOnGestureListener);
 		shop_names=new ArrayList<String>();
 		style_names=new ArrayList<String>();
 		pattern_names=new ArrayList<String>();
@@ -169,6 +178,77 @@ public class ListviewViaItemSearch extends Fragment implements  GestureDetector.
 		size_img=(TableRow) rootView.findViewById(R.id.size_img_table_row);
 		fabric_img=(TableRow) rootView.findViewById(R.id.fabric_img_table_row);
 		filter_options=(ListView) rootView.findViewById(R.id.listview_new_filter_prod);
+		frameLayout = (FrameLayout) rootView.findViewById(R.id.frame_layout_listview_prod_display);
+		frameLayout.getForeground().setAlpha(0);
+		popButton = (Button) rootView.findViewById(R.id.popup_button);
+		popup = new PopupWindow(getActivity());
+		popButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				View popUpView =inflater.inflate(R.layout.pop_window_custom_view,
+			            null); // inflating popup layout
+				WindowManager wm = (WindowManager) getActivity().getSystemService(getActivity().WINDOW_SERVICE);
+				Display display = wm.getDefaultDisplay();
+				Point size = new Point();
+				display.getSize(size);
+				int width = size.x;
+				int height = size.y;
+				frameLayout.getForeground().setAlpha(220);
+				   popup = new PopupWindow(popUpView,(int)( width/1.2),
+				            LayoutParams.WRAP_CONTENT, true); // Creation of popup
+				    popup.setAnimationStyle(android.R.style.Animation_Dialog);
+				    popup.showAtLocation(popUpView, Gravity.CENTER, 0, 0);
+				    ImageView cancelImage = (ImageView) popUpView.findViewById(R.id.cancel_image_popup);
+					LinearLayout price_ascending_lin_layout = (LinearLayout) popUpView.findViewById(R.id.price_ascending_lin_layout_popup);
+					LinearLayout price_descending_lin_layout =(LinearLayout) popUpView.findViewById(R.id.price_descending_lin_layout_popup);
+					LinearLayout popularity_lin_layout =(LinearLayout) popUpView.findViewById(R.id.trending_lin_layout_popup);
+					popularity_lin_layout.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View arg0) {
+							// TODO Auto-generated method stub
+							make_products_trending_method();
+							popup.dismiss();
+							frameLayout.getForeground().setAlpha(0);
+						}
+					});
+					price_ascending_lin_layout.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							make_products_ascending_in_price_method(true);
+							popup.dismiss();
+							frameLayout.getForeground().setAlpha(0);
+						}
+
+						
+					});
+price_descending_lin_layout.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							make_products_ascending_in_price_method(false);
+							popup.dismiss();
+							frameLayout.getForeground().setAlpha(0);
+						}
+
+						
+					});
+					cancelImage.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							popup.dismiss();
+							frameLayout.getForeground().setAlpha(0);
+						}
+					});
+			}
+		});
 		//lv_anim_cost=(ListView) rootView.findViewById(R.id.listview_cost);
 		//lv_anim_brand=(ListView) rootView.findViewById(R.id.listview_brand);
 			///changed 
@@ -389,7 +469,59 @@ public class ListviewViaItemSearch extends Fragment implements  GestureDetector.
 		    }
 		} );
 	}
+	private void make_products_ascending_in_price_method(boolean var) {
+		// TODO Auto-generated method stub
+		Collections.sort(product_list,new  CustomComparatorPrice(var));
+		apply_popup_changes();
+	}
+	private void make_products_trending_method() {
+		// TODO Auto-generated method stub
+		Collections.sort(product_list,new  CustomComparatorTrending());
+		apply_popup_changes();
+	}
+public void	apply_popup_changes(){
+	arraylist_product_list=new ArrayList<ArrayList<ProductInfo>>();
+	if(product_list.size()%2==0){
+		String body="http://theshopwiz.com/";
+	for(int j=0;j<product_list.size();){
+		ArrayList<ProductInfo> tp= new ArrayList<ProductInfo>();
+		tp.add(product_list.get(j));
+		allImagesUrl.add(body + product_list.get(j).getImageUrl());
+		tp.add(product_list.get(j+1));
+		allImagesUrl.add(body + product_list.get(j+1).getImageUrl());
+		
+		j=j+2;
+		arraylist_product_list.add(tp);
+		
+				}
+	}
+	else{
+		ArrayList<ProductInfo> tp= new ArrayList<ProductInfo>();
+		String body="http://theshopwiz.com/";
 
+		for(int j=0;j<product_list.size()-1;){
+			tp= new ArrayList<ProductInfo>();
+			tp.add(product_list.get(j));
+			System.out.println(product_list.get(j).getImageUrl());
+			allImagesUrl.add(body + product_list.get(j).getImageUrl());
+
+			tp.add(product_list.get(j+1));
+			allImagesUrl.add(body + product_list.get(j+1).getImageUrl());
+
+			j=j+2;
+			arraylist_product_list.add(tp);
+		
+		}	
+		tp= new ArrayList<ProductInfo>();
+		tp.add(product_list.get(product_list.size()-1));
+		allImagesUrl.add(body + product_list.get(product_list.size()-1).getImageUrl());
+		arraylist_product_list.add(tp);
+		
+	}
+	Toast.makeText(getActivity(), " "+product_list.size(), Toast.LENGTH_SHORT).show();
+	MySimpleArrayAdapter adapter=new MySimpleArrayAdapter(getActivity(),R.layout.listview_product,arraylist_product_list,unknown_field_names,request_string,"prod");
+	lv.setAdapter(adapter);
+	}
 	private String getJSON(String body) {
 		String ret="error";
 		try {
@@ -432,12 +564,12 @@ public class ListviewViaItemSearch extends Fragment implements  GestureDetector.
 		// TODO Auto-generated method stub
 		
 	}
-	public void after_load(final View rootView) {
+	public void after_load( View rootView) {
 		// TODO Auto-generated method stub
 		//rootView.setFocusableInTouchMode(true);
 		//rootView.requestFocus();
 		//getActivity().getSupportFragmentManager().
-		
+		System.out.println("product list size = "+product_list.size());
 		if(product_list.size()%2==0){
 			String body="http://theshopwiz.com/";
 		for(int j=0;j<product_list.size();){
@@ -797,8 +929,8 @@ filter_butt.setOnClickListener(new OnClickListener() {
 							// TODO Auto-generated method stub
 							rl_front.setVisibility(View.GONE);
 							rl_anim.requestFocus();
-							rootView.setFocusableInTouchMode(true);
-							rootView.requestFocus();
+							//rootView.setFocusableInTouchMode(true);
+							//rootView.requestFocus();
 							//b3.setVisibility(View.GONE);
 							
 						}
@@ -820,8 +952,7 @@ filter_butt.setOnClickListener(new OnClickListener() {
 			}
 			 
 		});
-		get_filters filter_json=new get_filters();
-		filter_json.execute();
+		filling_the_filters();
 	}
 	protected ArrayList<ProductInfo> product_list_segregation_after_filters(ArrayList<ProductInfo>filtered_product_based_on_cost_brand,List<Model> listModel_style,
 			List<Model> listModel_fabric, List<Model> listModel_pattern, List<Model> listModel_size, List<Model> listModel_color) {
@@ -974,13 +1105,21 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 					   unknown_field_names.add(field_names.get(j));
 				   }
 			   }*/
+			shop_names = new ArrayList<String>();
+			style_names = new ArrayList<String>();
+			pattern_names = new ArrayList<String>();
+			size_names = new ArrayList<String>();
+			fabric_names = new ArrayList<String>();
+			color_names = new ArrayList<String>();
+			
 			for(int i=0;i<a.length();++i){
 				JSONObject e = a.getJSONObject(i);
 				temp=new ProductInfo("K1","Westment",null , 700, null,"dhikna",100,"");
+				if(!shop_names.contains(e.getString("brand"))){
+					shop_names.add(e.getString("brand"));
+				}
 				temp.addProductId(e.getString("prod_id"));
-				
 				temp.dummy_prod_id=e.getString("prod_id");
-				
 				temp.addDescription(e.getString("description"));
 				temp.addCost(e.getInt("cost"));
 				temp.addShopName(e.getString("brand"));
@@ -988,6 +1127,7 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				temp.addShopAddress(e.getString("onelineaddress"));
 				//temp.addRating(e.getInt("Rating"));
 				//temp.addImageUrl(e.getString("prod_image"));
+				temp.popularity = e.getInt("popularity");
 				temp.imageurl=new ArrayList<String>();
 				temp.style=new ArrayList<String>();
 				temp.fabric=new ArrayList<String>();
@@ -1003,6 +1143,9 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				}
 				object=new JSONArray (e.getString("style"));
 				for(int k=0;k<object.length();++k){
+					if(! style_names.contains(object.getString(k))){
+						style_names.add(object.getString(k));
+					}
 					if(temp.style.contains(object.getString(k))){
 					}else{
 						temp.style.add(object.getString(k));
@@ -1010,6 +1153,9 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				}
 				object=new JSONArray (e.getString("fabric"));
 				for(int k=0;k<object.length();++k){
+					if(! fabric_names.contains(object.getString(k))){
+						fabric_names.add(object.getString(k));
+					}
 					if(temp.fabric.contains(object.getString(k))){
 					}else{
 						temp.fabric.add(object.getString(k));
@@ -1017,6 +1163,9 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				}
 				 object=new JSONArray (e.getString("pattern"));
 				for(int k=0;k<object.length();++k){
+					if(! pattern_names.contains(object.getString(k))){
+						pattern_names.add(object.getString(k));
+					}
 					if(temp.pattern.contains(object.getString(k))){
 					}else{
 						temp.pattern.add(object.getString(k));
@@ -1024,6 +1173,9 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				}
 				object=new JSONArray (e.getString("color"));
 				for(int k=0;k<object.length();++k){
+					if(! color_names.contains(object.getString(k))){
+						color_names.add(object.getString(k));
+					}
 					if(temp.color.contains(object.getString(k))){
 					}else{
 						temp.color.add(object.getString(k));
@@ -1031,6 +1183,9 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				}
 				object=new JSONArray (e.getString("size"));
 				for(int k=0;k<object.length();++k){
+					if(! size_names.contains(object.getString(k))){
+						size_names.add(object.getString(k));
+					}
 					if(temp.size.contains(object.getString(k))){
 					}else{
 						temp.size.add(object.getString(k));
@@ -1216,12 +1371,13 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
  private void prepareData3(String s) {
 		// TODO Auto-generated method stub
 		//String s=getJSON();
-		filter_entries=new HashMap<String,ArrayList<String>>();
+	 System.out.println("preparedata 3 =  "+s);
+		//filter_entries=new HashMap<String,ArrayList<String>>();
 		try {
 			JSONArray a=new JSONArray(s);
-			for(int k=0;k<unknown_field_names.size();++k){
+			/*for(int k=0;k<unknown_field_names.size();++k){
 				filter_entries.put(unknown_field_names.get(k), new ArrayList<String>());
-			}
+			}*/
 			
 			for(int i=0;i<a.length()-1;++i){
 				JSONObject e = a.getJSONObject(i);
@@ -1291,12 +1447,12 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 				
 				
 				else{////changed here///////////////////////////
-					for(int k=0;k<unknown_field_names.size();++k){
+					/*for(int k=0;k<unknown_field_names.size();++k){
 						if( e.has(unknown_field_names.get(k))){
 							filter_entries.get(unknown_field_names.get(k)).add(e.getString(unknown_field_names.get(k)));
 							Log.i(unknown_field_names.get(k),e.getString(unknown_field_names.get(k)));
 						}
-					}
+					}*/
 				}
 			}
 			JSONObject e = a.getJSONObject(a.length()-1);
@@ -1344,9 +1500,9 @@ protected ArrayList<ProductInfo> segregating_one_ata_a_time(ArrayList<ProductInf
 			 tp_string_list.add("Gray");
 			 //unknown_field_names.add("Color");
 			 //unknown_field_names.add("Material");
-			 filter_entries.put("Color", tp_string_list);
+			 /*filter_entries.put("Color", tp_string_list);
 			 filter_entries.put("Material", tp_string_list);
-			 filter_entries.put("Others", tp_string_list);
+			 filter_entries.put("Others", tp_string_list);*/
 			 
 			/* LinearLayout lv_dynamic=(LinearLayout) findViewById(R.id.layout_anim);
 			 for(int i=0;i<unknown_field_names.size();++i){

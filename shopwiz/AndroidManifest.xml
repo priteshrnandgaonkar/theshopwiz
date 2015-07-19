@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="19"
         android:targetSdkVersion="21" />
     <permission
          android:name="com.tech.shopwiz.permission.MAPS_RECEIVE"
@@ -38,6 +38,16 @@
             </intent-filter>
         </activity>
     <activity android:name="com.tech.shopwiz.MainActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/MyTheme"
+        android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
+     <activity android:name="com.tech.shopwiz.modified.ShopCollectionProducts"
+        android:screenOrientation="portrait"
+        android:theme="@style/MyTheme"
+        android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden"></activity>
+     <activity android:name="com.tech.shopwiz.modified.ShopDescriptionModified"
         android:screenOrientation="portrait"
         android:theme="@style/MyTheme"
         android:launchMode="singleTask"

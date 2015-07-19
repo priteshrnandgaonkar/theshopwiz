@@ -1,5 +1,7 @@
 package com.tech.shopwiz;
 
+import java.util.ArrayList;
+
 public class ShopInfo {
 public int id;
 public String shopName;
@@ -13,6 +15,9 @@ public String landline_no;
 public String mobile_no;
 public String website;
 public String categories;
+public ArrayList<String> gendersList;
+public ArrayList<String> types;
+public ArrayList<String> queryNamesForTypes;
 	public ShopInfo(int _id,String _shopName,String _address, String _description,
 			String _imageURL,String _landline_no,String _mobile_no,String _website,
 			String _categories, double _lat, double _lon ) {

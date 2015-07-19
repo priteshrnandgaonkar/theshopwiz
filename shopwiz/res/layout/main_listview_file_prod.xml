@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_layout_listview_prod_display"
+	android:foreground="@drawable/shape_window_dim"
+    >
+<RelativeLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:background="@color/white"
@@ -19,11 +24,26 @@
         android:divider="@null"
         >
     </ListView>
+     <RelativeLayout
+   android:layout_width="50dip"
+    android:layout_height="50dip"
+	android:layout_above="@+id/filter_layout"
+	android:layout_alignParentRight="true"
+	android:layout_marginBottom="5dp"
+    >
+    <Button 
+        android:id="@+id/popup_button"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:background="@drawable/filter"
+        />
+    </RelativeLayout>
  <RelativeLayout
    android:layout_width="50dip"
     android:layout_height="50dip"
     android:layout_alignParentBottom="true" 
     android:layout_alignParentRight="true"
+    android:id="@+id/filter_layout"
     >
     <Button 
         android:id="@+id/filter_button"
@@ -493,3 +513,4 @@
    
 </LinearLayout>
 </RelativeLayout>
+</FrameLayout>

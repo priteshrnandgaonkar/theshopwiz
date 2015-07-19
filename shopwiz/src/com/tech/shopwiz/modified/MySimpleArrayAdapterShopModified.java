@@ -106,14 +106,18 @@ public class MySimpleArrayAdapterShopModified extends BaseAdapter {
 				@Override
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
-					Intent intent = new Intent(context, ShopDescription.class);
+					Intent intent = new Intent(context, ShopDescriptionModified.class);
 					/*Bitmap bmp;
 					BitmapDrawable drawable=(BitmapDrawable) holder.img1.getDrawable();
 					bmp=drawable.getBitmap(); 
 					ByteArrayOutputStream bs = new ByteArrayOutputStream();
 					bmp.compress(Bitmap.CompressFormat.JPEG, 50, bs);
 					intent.putExtra("ShopDetailsBitmaps",  bs.toByteArray());*/
-					intent.putExtra("ShopDetailsImgURL", imgurl1);
+					intent.putExtra("ShopDetailsId", shop_lists.get(position).id);
+					intent.putExtra("ShopOneLineAddress", shop_lists.get(position).oneLineAddress);
+					intent.putExtra("StringLatitude", shop_lists.get(position).lat);
+					intent.putExtra("StringLongitude", shop_lists.get(position).lon);
+					/*intent.putExtra("ShopDetailsImgURL", imgurl1);
 					intent.putExtra("ShopDetailsDescription",shop_lists.get(position).description );
 					intent.putExtra("ShopDetailsLandline",shop_lists.get(position).landline_no);
 					intent.putExtra("ShopDetailsMobile",shop_lists.get(position).mobile_no );
@@ -123,10 +127,10 @@ public class MySimpleArrayAdapterShopModified extends BaseAdapter {
 					intent.putExtra("ShopDetailsLocation", loc_sent);
 					intent.putExtra("ShopDetailsAddress",shop_lists.get(position).address );
 					intent.putExtra("ShopDetailsCategories", shop_lists.get(position).categories);
-					intent.putExtra("ShopDetailsId", shop_lists.get(position).id);
+					
 					intent.putExtra("ShopDetailsName", shop_lists.get(position).shopName);
-					intent.putExtra("ShopDetailsWebsite", shop_lists.get(position).website);
-					//context.startActivity(intent);
+					intent.putExtra("ShopDetailsWebsite", shop_lists.get(position).website);*/
+					context.startActivity(intent);
 				}
 			});
 			
